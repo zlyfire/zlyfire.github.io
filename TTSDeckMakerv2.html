@@ -1,0 +1,435 @@
+<html>
+<meta charset="UTF-8"/>
+<head>
+<title>MTG Decklist -> TTS Deck</title>
+<style>
+body {
+    /* white to black linear noise gradient spanning from top to bottom */
+    background:#724727;
+	background-image: url(data:image/png;base64,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);
+}
+
+h1,h2,h3,h4,h5 {
+  color:#edc15f;
+  font-size:3em;
+  text-shadow:
+   -2px -2px 0 #bf3c27,
+	2px -2px 0 #bf3c27,
+   -2px  2px 0 #bf3c27,
+	2px  2px 0 #bf3c27;
+}
+
+.lds-default {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-default div {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #000;
+  border-radius: 50%;
+  animation: lds-default 1.2s linear infinite;
+}
+.lds-default div:nth-child(1) {
+  animation-delay: -0.1s;
+  top: 22px;
+  left: 57px;
+  background: #4b91b4;
+  border: 1px solid black;
+}
+.lds-default div:nth-child(2) {
+  animation-delay: -0.3s;
+  top: 7px;
+  left: 37px;
+  background: #dfcb93;
+  border: 1px solid black;
+}
+.lds-default div:nth-child(3) {
+  animation-delay: -0.5s;
+  top: 22px;
+  left: 16px;
+  background: #64924d;
+  border: 1px solid black;
+}
+.lds-default div:nth-child(4) {
+  animation-delay: -0.8s;
+  top: 47px;
+  left: 22px;
+  background: #bf4025;
+  border: 1px solid black;
+}
+.lds-default div:nth-child(5) {
+  animation-delay: -1s;
+  top: 47px;
+  left: 52px;
+  background: #3b3c2c;
+  border: 1px solid black;
+}
+@keyframes lds-default {
+  0%, 20%, 80%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+}
+</style>
+<script lang=javascript>
+var deckJSON={
+	"SaveName":"PlaceHolder",
+	"ObjectStates": [{
+			"Name": "DeckCustom",
+			"Nickname":"Deck",
+			"ContainedObjects": [],
+			"DeckIDs": [],
+			"CustomDeck": {},
+			"Transform": {
+				"posX": 0,
+				"posY": 1,
+				"posZ": 0,
+				"rotX": 0,
+				"rotY": 180,
+				"rotZ": 180,
+				"scaleX": 1,
+				"scaleY": 1,
+				"scaleZ": 1
+			}
+		},
+		{
+			"Name": "DeckCustom",
+			"Nickname":"Commander",
+			"ContainedObjects": [],
+			"DeckIDs": [],
+			"CustomDeck": {},
+			"Transform": {
+				"posX": 2.3,
+				"posY": 1,
+				"posZ": 0,
+				"rotX": 0,
+				"rotY": 180,
+				"rotZ": 0,
+				"scaleX": 1,
+				"scaleY": 1,
+				"scaleZ": 1
+			}
+		},
+		{
+			"Name": "DeckCustom",
+			"Nickname":"Tokens",
+			"ContainedObjects": [],
+			"DeckIDs": [],
+			"CustomDeck": {},
+			"Transform": {
+				"posX": 4.6,
+				"posY": 1,
+				"posZ": 0,
+				"rotX": 0,
+				"rotY": 180,
+				"rotZ": 0,
+				"scaleX": 1,
+				"scaleY": 1,
+				"scaleZ": 1
+			}
+		},
+		{
+			"Name": "DeckCustom",
+			"Nickname":"Reverse Sides",
+			"ContainedObjects": [],
+			"DeckIDs": [],
+			"CustomDeck": {},
+			"Transform": {
+				"posX": 6.9,
+				"posY": 1,
+				"posZ": 0,
+				"rotX": 0,
+				"rotY": 180,
+				"rotZ": 180,
+				"scaleX": 1,
+				"scaleY": 1,
+				"scaleZ": 1
+			}
+		}
+	]
+};
+
+var deckRawResponses=JSON.parse(localStorage.getItem("deckRawResponses")) || {};
+var tokenRawResponses=JSON.parse(localStorage.getItem("tokenRawResponses")) || {};
+var prevAPICallTime=0;
+
+function delay(ms){
+	return new Promise(resolve=>setTimeout(resolve,ms));
+};
+
+async function convertDeckToTTS(decklist){
+	document.getElementById('convertBtn').onclick="";
+	displayLoader(true);
+	var startTime=new Date();
+	var cardList=decklist.split('\n');
+	var re = /(\d+ |^[^\[])([^=]+?)(?:\n|$)/gm;
+	var output=document.getElementById('output');
+	output.value="";
+	const matches=decklist.matchAll(re);
+	var ttsDeck = new Array();
+	var extraCards=new Array();
+	var i=0;
+	var activeDeck="Deck";
+	for(const card of cardList){
+		if(card[0]=='['){
+			let newDeck=card.match(/\[(.*?)\]/)[1];
+			console.log(newDeck);
+			activeDeck=newDeck;
+			continue;
+		}
+		if(card.toLowerCase().startsWith("name=")){
+			let deckName=card.match(/name=(.*)/i)[1].trim();
+			console.log(deckName);
+			deckJSON.SaveName=deckName;
+			continue;
+		}
+		let t = card.match(/(\d+ )?(.*)/)
+		t[2]=t[2].trim();
+		let t2=t[2].split("\|");
+		ttsDeck[i]={};
+		var cData;
+		do{
+			cData=await fetchCardData(t2[0].trim(),(t2[1]?t2[1].trim():false));
+		}while(typeof(cData)=='undefined');
+		console.log(cData);
+			ttsDeck[i]["deck"]=activeDeck;
+			ttsDeck[i]["count"]=(t[1]?t[1].trim():1);
+			ttsDeck[i]["set"]=(cData.set?cData.set.toUpperCase():" ");
+		if(cData.image_uris){
+			ttsDeck[i]["image"]=cData.image_uris.png.split(/[?#]/)[0];
+			ttsDeck[i]["name"]=cData.name;
+			ttsDeck[i]["type"]=cData.type_line;
+			ttsDeck[i]["text"]=cData.oracle_text;
+		}else if(cData.card_faces){
+			ttsDeck[i]["image"]=cData.card_faces[0].image_uris.png.split(/[?#]/)[0];
+			ttsDeck[i]["name"]=cData.card_faces[0].name;
+			ttsDeck[i]["type"]=cData.card_faces[0].type_line;
+			ttsDeck[i]["text"]=cData.card_faces[0].oracle_text;
+			extraCards.push({
+				"deck":"Reverse Sides",
+				"count":(t[1]?t[1].trim():1),
+				"set":cData.set.toUpperCase(),
+				"image":cData.card_faces[1].image_uris.png.split(/[?#]/)[0],
+				"name":cData.card_faces[1].name,
+				"type":cData.card_faces[1].type_line,
+				"text":cData.card_faces[1].oracle_text
+			});
+		}
+		if(cData.all_parts){
+			for(let j=1;j<cData.all_parts.length;j++){
+				let tData=await fetchTokenData(cData.all_parts[j].uri);
+				extraCards.push({
+					"deck":"Tokens",
+					"count":1,
+					"set":tData.set.toUpperCase(),
+					"image":tData.image_uris.png.split(/[?#]/)[0],
+					"name":tData.name,
+					"type":tData.type_line,
+					"text":tData.oracle_text
+				});
+			};
+		};
+		console.log(ttsDeck[i]);
+		i++;
+	}
+	console.log("Extra Cards",extraCards);
+	for(const cardnum in extraCards)
+		ttsDeck.push(extraCards[cardnum]);
+	console.log("Raw JSON Responses",deckRawResponses);
+	console.log("Deck",ttsDeck);
+	writeDeckObject(ttsDeck);
+	console.log("Elapsed Time: "+((new Date().getTime()-startTime.getTime())/1000)+"s")
+	localStorage.setItem("deckRawResponses", JSON.stringify(deckRawResponses));
+	localStorage.setItem("tokenRawResponses", JSON.stringify(tokenRawResponses));
+	displayLoader(false);
+};
+
+async function fetchCardData(card,set=false){
+	console.log("Name:",card,((set)?"|Set: "+set:" "));
+	if(!deckRawResponses[card]){
+		deckRawResponses[card]={};
+		deckRawResponses[card][((set)?set:0)]=card;
+	}else if(typeof deckRawResponses[card][((set)?set:0)]!=='undefined'){
+		console.log("Card already fetched, skipping API call");
+		console.log(deckRawResponses[card][((set)?set:0)]);
+		return deckRawResponses[card][((set)?set:0)];
+	}
+	let raw = await apiCall("https://api.scryfall.com/cards/named?exact="+encodeURIComponent(card.replace('+',"%2B"))+((set)?"&set="+set:""));
+	let response=await raw.json();
+	do{
+		var success=false;
+		try{
+			deckRawResponses[card][response.set.toUpperCase()]=response;
+			success=true;
+		}catch(error){
+			console.log("Error:");
+			console.log(response);
+			raw=await apiCall("https://api.scryfall.com/cards/named?exact="+encodeURIComponent(card.replace('+',"%2B")));
+			response=await raw.json();
+		}
+	}while(!success);
+	console.log(response);
+	return response;
+};
+
+async function fetchTokenData(uri){
+	console.log("Token URI:",uri);
+	if(tokenRawResponses[uri]){
+		console.log("Token already fetched, skipping API call");
+		return tokenRawResponses[uri];
+	}
+	let raw = await apiCall(uri);
+	let response=await raw.json();
+	tokenRawResponses[uri]=response;
+	console.log(response);
+	return response;
+};
+
+async function apiCall(url){
+	prevAPICallTime=new Date().getTime();
+	console.log(0);
+	let response=await fetch(url);
+	console.log(new Date().getTime()-prevAPICallTime);
+	await delay(200-(new Date().getTime()-prevAPICallTime));
+	await console.log("API Rate limit respected");
+	console.log(new Date().getTime()-prevAPICallTime);
+	return response;
+};
+
+function writeDeckObject(deckList){
+	console.log("Writing deck object");
+	console.log(deckList);
+	var output=document.getElementById('output');
+	var subDecks={};
+	for(let k=0;k<deckJSON.ObjectStates.length;k++){
+		subDecks[deckJSON.ObjectStates[k].Nickname]=k;
+		deckJSON.ObjectStates[k].ContainedObjects=new Array();
+	}
+	console.log(subDecks);
+	for(const card of deckList){
+		let sd=subDecks[card.deck];
+		console.log("SubDeckID:",sd);
+		if(typeof sd=='undefined'){
+			console.log("Generating new deck entry for",card.deck);
+			subDecks[card.deck]=Object.keys(subDecks).length;
+			sd=subDecks[card.deck];
+			deckJSON.ObjectStates[sd]={
+				"Name": "DeckCustom",
+				"Nickname":card.deck,
+				"ContainedObjects": [],
+				"DeckIDs": [],
+				"CustomDeck": {},
+				"Transform": {
+					"posX": 2.3*(3-sd),
+					"posY": 1,
+					"posZ": 0,
+					"rotX": 0,
+					"rotY": 180,
+					"rotZ": 180,
+					"scaleX": 1,
+					"scaleY": 1,
+					"scaleZ": 1
+				}
+			};
+		};
+		let z=deckJSON.ObjectStates[sd].ContainedObjects.length;
+		for(let j=0;j<card.count;j++){
+			z=deckJSON.ObjectStates[sd].ContainedObjects.length;
+			deckJSON.ObjectStates[sd].DeckIDs[deckJSON.ObjectStates[sd].DeckIDs.length]=(z+1)*100;
+			deckJSON.ObjectStates[sd].ContainedObjects[z]={
+				"CardID": (z+1)*100,
+				"Name": "Card",
+				"Nickname": card.name,
+				"Transform": {
+					"posX": 0,
+					"posY": 0,
+					"posZ": 0,
+					"rotX": 0,
+					"rotY": 180,
+					"rotZ": 180,
+					"scaleX": 1,
+					"scaleY": 1,
+					"scaleZ": 1
+				}
+			};
+			deckJSON.ObjectStates[sd].CustomDeck[z+1]={
+				"FaceURL": card.image,
+				"BackURL": "https://c1.scryfall.com/file/scryfall-card-backs/large/59/597b79b3-7d77-4261-871a-60dd17403388.jpg",
+				"NumHeight": 1,
+				"NumWidth": 1,
+				"BackIsHidden": true
+			};
+		};
+	};
+	for(let i=0;i<deckJSON.ObjectStates.length;i++){
+		let deck=deckJSON.ObjectStates[i];
+		if(deck.DeckIDs.length==1){
+			deck.Name="Card";
+			deck.CardID=deck.ContainedObjects[0].CardID;
+			deck.Nickname=deck.ContainedObjects[0].Nickname;
+			delete deck.ContainedObjects;
+		}else if(deck.DeckIDs.length==0){
+			deckJSON.ObjectStates.splice(i,1);
+			i--;
+		}
+	};
+	output.value=JSON.stringify(deckJSON);
+	console.log(deckJSON);
+};
+
+function downloadDeck(){
+	var deckData="data:text/json;charset=utf-8,"+encodeURIComponent(JSON.stringify(deckJSON));
+	var dlLink=document.getElementById('downloadLink');
+	dlLink.setAttribute("href",deckData);
+	dlLink.setAttribute("download",deckJSON.SaveName+".json");
+	dlLink.click();
+};
+
+function generateTokensDeck(){
+	for(const card of deckRawResponses){
+		
+	}
+};
+
+function displayLoader(bool){
+	document.getElementById('loadanim').style.display=(bool?'block':'none');
+};
+</script>
+</head>
+<body>
+<h1>MTG Decklist -> TTS Deck</h5>
+<div class="flexbox-container" style="display:flex;">
+	<div class="left" style="flex:1;">
+		<textarea rows="50" cols="100" id="decklist" placeholder=
+"name=Deck Name
+[Commander]
+Card Name
+[Deck]
+1 Card
+3 Card|Set
+1 Card
+[Sideboard]
+"></textarea>
+	</div>
+	<div class="middle" style="flex:1;">
+		<input id="convertBtn" type="submit" value="Convert" onclick="document.getElementById('decklist').value=document.getElementById('decklist').value.trim();convertDeckToTTS(document.getElementById('decklist').value)"/>
+		<br/>
+		<div id='loadanim' class="lds-default" style='display:none'><div></div><div></div><div></div><div></div><div></div></div>
+	</div>
+	<div class="right" style="flex:1;">
+		<textarea rows="50" cols="100" id='output'>
+		</textarea>
+	</div>
+	<div class="extras" style="flex:1;">
+		<a id="downloadLink" style="display:none" tabindex=-1></a>
+		<input type="submit" value="Download TTS File" onclick="downloadDeck()"/>
+	</div>
+</div>
+</body>
+</html>
