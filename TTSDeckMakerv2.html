@@ -260,7 +260,7 @@ async function fetchCardData(card,set=false){
 		console.log(deckRawResponses[card][((set)?set:0)]);
 		return deckRawResponses[card][((set)?set:0)];
 	}
-	let raw = await apiCall("https://api.scryfall.com/cards/named?exact="+encodeURI(card)+((set)?"&set="+set:""));
+	let raw = await apiCall("https://api.scryfall.com/cards/named?exact="+encodeURIComponent(card)+((set)?"&set="+set:""));
 	let response=await raw.json();
 	do{
 		var success=false;
@@ -270,7 +270,7 @@ async function fetchCardData(card,set=false){
 		}catch(error){
 			console.log("Error:");
 			console.log(response);
-			raw=await apiCall("https:/api.scryfall.com/cards/named?exact="+encodeURI(card));
+			raw=await apiCall("https://api.scryfall.com/cards/named?exact="+encodeURIComponent(card));
 			response=await raw.json();
 		}
 	}while(!success);
