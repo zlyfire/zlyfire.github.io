@@ -300,7 +300,7 @@ async function apiCall(url){
 	await console.log("API Rate limit respected");
 	console.log(new Date().getTime()-prevAPICallTime);
 	return response;
-}
+};
 
 function writeDeckObject(deckList){
 	console.log("Writing deck object");
