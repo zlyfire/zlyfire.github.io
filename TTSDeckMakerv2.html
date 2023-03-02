@@ -166,16 +166,16 @@ function delay(ms){
 async function convertDeckToTTS(decklist){
 	document.getElementById('convertBtn').onclick="";
 	displayLoader(true);
-	var startTime=new Date();
-	var cardList=decklist.split('\n');
-	var re = /(\d+ |^[^\[])([^=]+?)(?:\n|$)/gm;
-	var output=document.getElementById('output');
+	let startTime=new Date();
+	let cardList=decklist.split('\n');
+	let re = /(\d+ |^[^\[])([^=]+?)(?:\n|$)/gm;
+	let output=document.getElementById('output');
 	output.value="";
 	const matches=decklist.matchAll(re);
-	var ttsDeck = new Array();
-	var extraCards=new Array();
-	var i=0;
-	var activeDeck="Deck";
+	let ttsDeck = new Array();
+	let extraCards=new Array();
+	let i=0;
+	let activeDeck="Deck";
 	for(const card of cardList){
 		if(card[0]=='['){
 			let newDeck=card.match(/\[(.*?)\]/)[1];
@@ -193,7 +193,7 @@ async function convertDeckToTTS(decklist){
 		t[2]=t[2].trim();
 		let t2=t[2].split("\|");
 		ttsDeck[i]={};
-		var cData;
+		let cData;
 		do{
 			cData=await fetchCardData(t2[0].trim(),(t2[1]?t2[1].trim():false));
 		}while(typeof(cData)=='undefined');
@@ -417,9 +417,9 @@ function downloadCmder(){
 	}
 	if(cmdFace=="")
 		return;
-	var dlLink=document.getElementById('downloadLink');
+	var dlLink=document.getElementById('cmdCardDownload');
 	dlLink.setAttribute("href",cmdFace);
-	dlLink.setAttribute("download",deckJSON.SaveName+".json");
+	dlLink.setAttribute("download",deckJSON.SaveName+".png");
 	dlLink.click();
 }
 </script>
