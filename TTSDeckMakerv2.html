@@ -421,9 +421,11 @@ async function downloadCmder(){
 	let dlLink=document.getElementById('cmdCardDownload');
 	fetch(cmdFace)
     	.then((data)=>{return data.blob()})
-		.then((img)=>{dlLink.setAttribute("href",URL.createObjectURL(img));});
-	dlLink.setAttribute("download",deckJSON.SaveName+".png");
-	dlLink.click();
+		.then((img)=>{
+			dlLink.setAttribute("href",URL.createObjectURL(img));
+			dlLink.setAttribute("download",deckJSON.SaveName+".png");
+			dlLink.click();
+		});
 }
 </script>
 </head>
