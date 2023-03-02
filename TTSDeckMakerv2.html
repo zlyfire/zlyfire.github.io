@@ -406,6 +406,22 @@ function clearLocalStorage(){
 	localStorage.setItem("deckRawResponses", null);
 	localStorage.setItem("tokenRawResponses", null);
 }
+
+function downloadCmder(){
+	let cmdFace="";
+	for(let j=0;j<deckJSON.ObjectStates.length;j++){
+		if(deckJSON.ObjectStates[j].Nickname.toUpperCase() == "COMMANDER"){
+			cmdFace=deckJSON.ObjectStates[j].CustomDeck[1].FaceURL;
+			break;
+		}
+	}
+	if(cmdFace=="")
+		return;
+	var dlLink=document.getElementById('downloadLink');
+	dlLink.setAttribute("href",cmdFace);
+	dlLink.setAttribute("download",deckJSON.SaveName+".json");
+	dlLink.click();
+}
 </script>
 </head>
 <body>
@@ -435,6 +451,8 @@ Card Name
 	<div class="extras" style="flex:1;">
 		<a id="downloadLink" style="display:none" tabindex=-1></a>
 		<input type="submit" value="Download TTS File" onclick="downloadDeck()"/>
+		<a id="cmdCardDownload" style="display:none" tabindex=-1></a>
+		<input type="submit" value="Download Commander" onclick="downloadCmder()"/>
 	</div>
 </div>
 <div class="misc">
