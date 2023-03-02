@@ -385,8 +385,8 @@ function writeDeckObject(deckList){
 };
 
 function downloadDeck(){
-	var deckData="data:text/json;charset=utf-8,"+encodeURIComponent(JSON.stringify(deckJSON));
-	var dlLink=document.getElementById('downloadLink');
+	let deckData="data:text/json;charset=utf-8,"+encodeURIComponent(JSON.stringify(deckJSON));
+	let dlLink=document.getElementById('downloadLink');
 	dlLink.setAttribute("href",deckData);
 	dlLink.setAttribute("download",deckJSON.SaveName+".json");
 	dlLink.click();
@@ -407,7 +407,7 @@ function clearLocalStorage(){
 	localStorage.setItem("tokenRawResponses", null);
 }
 
-function downloadCmder(){
+async function downloadCmder(){
 	let cmdFace="";
 	for(let j=0;j<deckJSON.ObjectStates.length;j++){
 		if(deckJSON.ObjectStates[j].Nickname.toUpperCase() == "COMMANDER"){
@@ -417,8 +417,9 @@ function downloadCmder(){
 	}
 	if(cmdFace=="")
 		return;
-	var dlLink=document.getElementById('cmdCardDownload');
-	dlLink.setAttribute("href",cmdFace);
+	let dlLink=document.getElementById('cmdCardDownload');
+	let cmdFaceData = await fetch(cmdFace);
+	dlLink.setAttribute("href",cmdFaceData.body);
 	dlLink.setAttribute("download",deckJSON.SaveName+".png");
 	dlLink.click();
 }
