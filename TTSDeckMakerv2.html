@@ -417,9 +417,11 @@ async function downloadCmder(){
 	}
 	if(cmdFace=="")
 		return;
+	//let cmdFaceData = await fetch(cmdFace);
 	let dlLink=document.getElementById('cmdCardDownload');
-	let cmdFaceData = await fetch(cmdFace);
-	dlLink.setAttribute("href",cmdFaceData.body);
+	fetch(cmdFace)
+    	.then((data)=>{return data.blob()})
+		.then((img)=>{dlLink.setAttribute("href",URL.createObjectURL(img));});
 	dlLink.setAttribute("download",deckJSON.SaveName+".png");
 	dlLink.click();
 }
