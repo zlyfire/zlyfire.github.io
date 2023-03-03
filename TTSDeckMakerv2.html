@@ -414,6 +414,10 @@ async function downloadCmder(){
 			cmdFace=deckJSON.ObjectStates[j].CustomDeck[1].FaceURL;
 			break;
 		}
+		if(deckJSON.ObjectStates[j].Name="Card"){
+			cmdFace=deckJSON.ObjectStates[j].FaceURL;
+			break;
+		}
 	}
 	if(cmdFace=="")
 		return;
