@@ -410,7 +410,7 @@ function clearLocalStorage(){
 async function downloadCmder(){
 	let cmdFace="";
 	for(let j=0;j<deckJSON.ObjectStates.length;j++){
-		if(deckJSON.ObjectStates[j].Nickname.toUpperCase() == "COMMANDER" || deckJSON.ObjectStates[j].Name="Card"){
+		if(deckJSON.ObjectStates[j].Nickname.toUpperCase() == "COMMANDER" || deckJSON.ObjectStates[j].Name=="Card"){
 			cmdFace=deckJSON.ObjectStates[j].CustomDeck[1].FaceURL;
 			break;
 		}
