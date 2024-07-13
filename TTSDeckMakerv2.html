@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <meta charset="UTF-8"/>
 <head>
@@ -198,9 +199,9 @@ async function convertDeckToTTS(decklist){
 			cData=await fetchCardData(t2[0].trim(),(t2[1]?t2[1].trim():false));
 		}while(typeof(cData)=='undefined');
 		console.log(cData);
-			ttsDeck[i]["deck"]=activeDeck;
-			ttsDeck[i]["count"]=(t[1]?t[1].trim():1);
-			ttsDeck[i]["set"]=(cData.set?cData.set.toUpperCase():" ");
+		ttsDeck[i]["deck"]=activeDeck;
+		ttsDeck[i]["count"]=(t[1]?t[1].trim():1);
+		ttsDeck[i]["set"]=(cData.set?cData.set.toUpperCase():" ");
 		if(cData.image_uris){
 			ttsDeck[i]["image"]=cData.image_uris.png.split(/[?#]/)[0];
 			ttsDeck[i]["name"]=cData.name;
@@ -222,17 +223,21 @@ async function convertDeckToTTS(decklist){
 			});
 		}
 		if(cData.all_parts){
-			for(let j=1;j<cData.all_parts.length;j++){
-				let tData=await fetchTokenData(cData.all_parts[j].uri);
-				extraCards.push({
-					"deck":"Tokens",
-					"count":1,
-					"set":tData.set.toUpperCase(),
-					"image":tData.image_uris.png.split(/[?#]/)[0],
-					"name":tData.name,
-					"type":tData.type_line,
-					"text":tData.oracle_text
-				});
+			for(let j=0;j<cData.all_parts.length;j++){
+				//if(cData.all_parts[j].component=="token"){
+					let tData=await fetchTokenData(cData.all_parts[j].uri);
+					if(cData.name!=tData.name){
+						extraCards.push({
+							"deck":"Tokens",
+							"count":1,
+							"set":tData.set.toUpperCase(),
+							"image":tData.image_uris.png.split(/[?#]/)[0],
+							"name":tData.name,
+							"type":tData.type_line,
+							"text":tData.oracle_text
+						});
+					}
+				//};
 			};
 		};
 		console.log(ttsDeck[i]);
@@ -254,10 +259,9 @@ async function fetchCardData(card,set=false){
 	console.log("Name:",card,((set)?"|Set: "+set:" "));
 	if(!deckRawResponses[card]){
 		deckRawResponses[card]={};
-		deckRawResponses[card][((set)?set:0)]=card;
+		//deckRawResponses[card][((set)?set:0)]=card;
 	}else if(typeof deckRawResponses[card][((set)?set:0)]!=='undefined'){
-		console.log("Card already fetched, skipping API call");
-		console.log(deckRawResponses[card][((set)?set:0)]);
+		console.log("Card already fetched, skipping API call for \""+deckRawResponses[card][((set)?set:0)]+'"');
 		return deckRawResponses[card][((set)?set:0)];
 	}
 	let raw = await apiCall("https://api.scryfall.com/cards/named?exact="+encodeURIComponent(card.replace('+',"%2B"))+((set)?"&set="+set:""));
@@ -268,8 +272,8 @@ async function fetchCardData(card,set=false){
 			deckRawResponses[card][response.set.toUpperCase()]=response;
 			success=true;
 		}catch(error){
-			console.log("Error:");
-			console.log(response);
+			console.log("Error: "+response);
+			console.log("Trying "+"https://api.scryfall.com/cards/named?exact="+encodeURIComponent(card.replace('+',"%2B")));
 			raw=await apiCall("https://api.scryfall.com/cards/named?exact="+encodeURIComponent(card.replace('+',"%2B")));
 			response=await raw.json();
 		}
@@ -360,7 +364,6 @@ function writeDeckObject(deckList){
 			};
 			deckJSON.ObjectStates[sd].CustomDeck[z+1]={
 				"FaceURL": card.image,
-				//"BackURL": "https://c1.scryfall.com/file/scryfall-card-backs/large/59/597b79b3-7d77-4261-871a-60dd17403388.jpg",
 				"BackURL": "https://backs.scryfall.io/large/5/9/597b79b3-7d77-4261-871a-60dd17403388.jpg",
 				"NumHeight": 1,
 				"NumWidth": 1,
@@ -410,7 +413,11 @@ function clearLocalStorage(){
 async function downloadCmder(){
 	let cmdFace="";
 	for(let j=0;j<deckJSON.ObjectStates.length;j++){
-		if(deckJSON.ObjectStates[j].Nickname.toUpperCase() == "COMMANDER" || deckJSON.ObjectStates[j].Name=="Card"){
+		if(deckJSON.ObjectStates[j].Nickname.toUpperCase() == "COMMANDER"){
+			cmdFace=deckJSON.ObjectStates[j].CustomDeck[1].FaceURL;
+			break;
+		}
+		if(deckJSON.ObjectStates[j].Name=="Card"){
 			cmdFace=deckJSON.ObjectStates[j].CustomDeck[1].FaceURL;
 			break;
 		}
