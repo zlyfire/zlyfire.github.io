@@ -8,5 +8,8 @@
 }
 
 .edit .stick.right {
-	background-rotateY: 45deg;
+  background-position: 0px 0;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
 }
