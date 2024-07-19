@@ -1,3 +1,7 @@
 .controller.edit {
-  background: url(https://zlyfire.github.io/dandy%20Custom%20xbox.png);
+  background: url(https://zlyfire.github.io/DandyCon/dandyCustomXbox.png);
+}
+
+.edit .stick {
+  background: url(https://zlyfire.github.io/DandyCon/dandyCustomXboxStick.png);
 }
