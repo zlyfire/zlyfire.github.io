@@ -4,4 +4,9 @@
 
 .edit .stick {
   background: url(https://zlyfire.github.io/DandyCon/stick.png);
+  background-position: -85px 0;
+}
+
+.edit .stick.right {
+	background-rotateY: 45deg;
 }
